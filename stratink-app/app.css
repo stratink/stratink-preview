@@ -63,3 +63,10 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:6px;borde
 .tiles.big .tile.t4{grid-column:auto}
 .soon-tile{background:linear-gradient(140deg,#8C97AD,#6B768C);opacity:.85}
 .badge{position:absolute;top:12px;inset-inline-end:12px;background:#FFF4D6;color:#7A4B00;font-size:11px;font-weight:800;padding:3px 8px;border-radius:999px}
+/* Icon treatment from the original prototype: white circle, coloured stroke icon */
+.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-5px;flex:none}
+.tile .ic{font-size:0}.tile .ic .i{width:26px;height:26px;stroke-width:2.25}
+.t1 .ic{color:#2F79A0}.t2 .ic{color:#2854B5}.t3 .ic{color:#3C9179}.t4 .ic{color:#14253E}.soon-tile .ic{color:#5A6478}
+.iconbtn .i{stroke:#fff}
+.tabbar a span{font-size:0;display:flex;justify-content:center;margin-bottom:2px}.tabbar a .i{width:22px;height:22px}
+.card .i{color:var(--royal)}

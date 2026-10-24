@@ -2,6 +2,26 @@
 (function(){
 /* i18n: English-only for now. To re-add a language: add its strings to S below, add it to LANGS, and restore a switcher (set st.lang). RTL locales listed in RTL get dir="rtl" via route(). */
 const LANGS=[["en","English"]];
+/* Icons: inline SVGs reused from the original Stratink prototype (custom inline SVG, stroke style, no icon font/CDN).
+   Original: camera, megaphone, car, folder, building, truck, box, tools, bell. Added in the same stroke style: home, gear, grid, upload, users, check, doc. */
+const ICONS={
+camera:'<path d="M4 8h3l1.4-2h7.2L17 8h3v11H4V8Z"/><circle cx="12" cy="14" r="3.3"/>',
+megaphone:'<path d="M4 13h3l8 4V7l-8 4H4v2Z"/><path d="M17 10a4 4 0 0 1 0 4"/><path d="M8 14l1.2 4H12"/>',
+car:'<path d="M5 15h14l-1.4-5.2A2.5 2.5 0 0 0 15.2 8H8.8a2.5 2.5 0 0 0-2.4 1.8L5 15Z"/><path d="M6 15v3"/><path d="M18 15v3"/><circle cx="8" cy="16.5" r="1"/><circle cx="16" cy="16.5" r="1"/>',
+folder:'<path d="M3 7h7l2 2h9v10H3V7Z"/>',
+building:'<path d="M5 21V4h9v17"/><path d="M14 9h5v12"/><path d="M8 8h2M8 12h2M8 16h2M16 13h1"/>',
+truck:'<path d="M3 7h11v9H3V7Z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/>',
+box:'<path d="M4 8l8-4 8 4v9l-8 4-8-4V8Z"/><path d="M4 8l8 4 8-4"/><path d="M12 12v9"/>',
+tools:'<path d="M14 6l4 4"/><path d="M4 20l7-7"/><path d="M13 5l6 6-2 2-6-6 2-2Z"/><path d="M7 5a4 4 0 0 0 5 5l-6 6a3 3 0 0 1-2-5l3-3Z"/>',
+bell:'<path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 2h16l-2-2Z"/><path d="M9.5 20a2.5 2.5 0 0 0 5 0"/>',
+home:'<path d="M4 11l8-7 8 7v9h-5v-6H9v6H4v-9Z"/>',
+gear:'<circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/>',
+grid:'<rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/>',
+upload:'<path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/>',
+users:'<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14a5 5 0 0 1 5 5"/>',
+check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+doc:'<path d="M6 3h8l4 4v14H6V3Z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/>'};
+const ic=k=>`<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICONS[k]}</svg>`;
 const RTL=["ar","fa"];
 const S={en:{
 value:"For BC strata councils: notices, maintenance and records in one place — fewer emails, clearer decisions.",
@@ -74,8 +94,8 @@ function toast(m){const el=document.getElementById("toast");el.textContent=m;el.
 const sub=(title,back)=>`<header class="sub row"><a class="back" href="#${back}" aria-label="Back"><span class="chev" aria-hidden="true">‹</span></a><h1>${title}</h1></header>`;
 const banners=()=>{let b=`<div class="banner demo" role="note">${t("demoBanner")}</div>`;
 return b};
-function tabbar(cur){const r=st.role==="council"?[["/council","▦",t("dash")],["/requests","🔧",t("requests")],["/notices","📣",t("notices")],["/documents","📁",t("docs")],["/settings","⚙",t("more")]]
- :[["/home","⌂",t("home")],["/requests","🔧",t("requests")],["/notices","📣",t("notices")],["/documents","📁",t("docs")],["/settings","⚙",t("more")]];
+function tabbar(cur){const r=st.role==="council"?[["/council",ic("grid"),t("dash")],["/requests",ic("camera"),t("requests")],["/notices",ic("megaphone"),t("notices")],["/documents",ic("folder"),t("docs")],["/settings",ic("gear"),t("more")]]
+ :[["/home",ic("home"),t("home")],["/requests",ic("camera"),t("requests")],["/notices",ic("megaphone"),t("notices")],["/documents",ic("folder"),t("docs")],["/settings",ic("gear"),t("more")]];
  return `<nav class="tabbar" aria-label="Main">${r.map(([h,i,l])=>`<a href="#${h}" ${cur===h?'aria-current="page"':""}><span aria-hidden="true">${i}</span>${l}</a>`).join("")}</nav>`}
 const statusPill=s=>`<span class="pill s-${s}">${t("st_"+s)}</span>`;
 const sampleTag=`<span class="tag">${t("sample")}</span>`;
@@ -87,17 +107,17 @@ V.join=()=>`<div class="top"><div class="brand">STRATINK<b>™</b></div><h1>${t(
 V.unit=()=>{const p=st.pending;if(!p)return V.join();return `${sub(t("unitT"),"/join")}<main><p>${t("unitSub")}</p>
 <div class="card"><p class="muted">${t("unit")}</p><h3>${esc(p.unit)}</h3><p class="muted">${t("name")}</p><h3>${esc(p.name)}</h3><p class="muted">${t("role")}</p><h3>${t(p.role)}</h3> ${sampleTag}</div>
 <button class="btn primary" id="confirm">${t("confirm")}</button><a class="btn ghost" href="#/join">${t("notMe")}</a></main>`};
-V.home=()=>{const n=st.notices.slice(0,2),mine=st.requests.filter(r=>r.mine);return `<div class="top"><div class="row between"><div class="brand">STRATINK<b>™</b></div><a class="iconbtn" href="#/notices" aria-label="${t("notices")}"><span aria-hidden="true">🔔</span></a></div>
+V.home=()=>{const n=st.notices.slice(0,2),mine=st.requests.filter(r=>r.mine);return `<div class="top"><div class="row between"><div class="brand">STRATINK<b>™</b></div><a class="iconbtn" href="#/notices" aria-label="${t("notices")}"><span aria-hidden="true">${ic("bell")}</span></a></div>
 <h1>${t("welcome")}</h1><p>${t("unitLine")}</p><p class="value">${t("value")}</p></div>${banners()}
 <main><div class="tiles big">
-<a class="tile t2" href="#/notices" aria-label="${t("nTitle")}"><span class="ic" aria-hidden="true">📣</span><span><b>${t("nTitle")}</b><br><small>${t("nSub")}</small></span></a>
-<a class="tile t1" href="#/requests/new" aria-label="${t("mNew")}"><span class="ic" aria-hidden="true">🔧</span><span><b>${t("mNew")}</b><br><small>${t("mNewSub")}</small></span></a>
-<a class="tile t4" href="#/documents" aria-label="${t("dTitle")}"><span class="ic" aria-hidden="true">📁</span><span><b>${t("dTitle")}</b><br><small>${t("dSub")}</small></span></a>
-${[["🚗","parking"],["📦","packages"],["🛠","market"],["🏋","amen"]].map(([i,k])=>`<button type="button" class="tile soon-tile" data-soon="${k}" aria-label="${t(k)} — ${t("soon")}"><span class="badge">${t("soon")}</span><span class="ic" aria-hidden="true">${i}</span><span><b>${t(k)}</b></span></button>`).join("")}
+<a class="tile t2" href="#/notices" aria-label="${t("nTitle")}"><span class="ic" aria-hidden="true">${ic("megaphone")}</span><span><b>${t("nTitle")}</b><br><small>${t("nSub")}</small></span></a>
+<a class="tile t1" href="#/requests/new" aria-label="${t("mNew")}"><span class="ic" aria-hidden="true">${ic("camera")}</span><span><b>${t("mNew")}</b><br><small>${t("mNewSub")}</small></span></a>
+<a class="tile t4" href="#/documents" aria-label="${t("dTitle")}"><span class="ic" aria-hidden="true">${ic("folder")}</span><span><b>${t("dTitle")}</b><br><small>${t("dSub")}</small></span></a>
+${[[ic("car"),"parking"],[ic("box"),"packages"],[ic("tools"),"market"],[ic("building"),"amen"]].map(([i,k])=>`<button type="button" class="tile soon-tile" data-soon="${k}" aria-label="${t(k)} — ${t("soon")}"><span class="badge">${t("soon")}</span><span class="ic" aria-hidden="true">${i}</span><span><b>${t(k)}</b></span></button>`).join("")}
 </div>
 <h2>${t("recent")} ${sampleTag}</h2>${n.map(noticeCard).join("")}
 ${mine.length?`<h2>${t("myReq")}</h2>`+mine.map(reqCard).join(""):""}</main>${tabbar("/home")}`};
-const noticeCard=n=>`<a class="card" href="#/notices/${n.id}"><h3>${esc(n.title)}</h3><p>${esc(n.by)} · ${ago(n.at)} ${n.needAck?(st.acks[n.id]?" · ✓ "+t("acked"):" · "+t("ack")+"?"):""}</p></a>`;
+const noticeCard=n=>`<a class="card" href="#/notices/${n.id}"><h3>${esc(n.title)}</h3><p>${esc(n.by)} · ${ago(n.at)} ${n.needAck?(st.acks[n.id]?" · "+ic("check")+" "+t("acked"):" · "+t("ack")+"?"):""}</p></a>`;
 const reqCard=r=>`<a class="card" href="#/requests/${r.id}"><div class="row between"><h3>${esc(r.loc)}</h3>${statusPill(r.status)}</div><p>${r.id} · ${t(r.cat)} · ${ago(r.at)}</p></a>`;
 V.requests=()=>{const list=st.role==="council"?st.requests:st.requests.filter(r=>r.mine||true);
  return `${sub(st.role==="council"?t("allReq"):t("requests"),st.role==="council"?"/council":"/home")}<main><a class="btn primary" href="#/requests/new">+ ${t("mNew")}</a><h2>${t("requests")} ${sampleTag}</h2>${list.slice().sort((a,b)=>b.at-a.at).map(reqCard).join("")}</main>${tabbar("/requests")}`};
@@ -110,26 +130,26 @@ V.newReq=()=>`${sub(t("mNew"),"/requests")}<main><form id="f-req" novalidate>
 <button class="btn primary">${t("submit")}</button></form></main>${tabbar("/requests")}`;
 V.reqDetail=id=>{const r=st.requests.find(x=>x.id===id);if(!r)return V.requests();const order=["submitted","assigned","resolved"],ci=order.indexOf(r.status);
  const conf=sessionStorage.getItem("justSent")===id;sessionStorage.removeItem("justSent");
- return `${sub(r.id,"/requests")}<main>${conf?`<div class="card" style="border-color:var(--green);background:#F2FAEE" role="status"><h3>✓ ${t("sent")}</h3><p>${t("sentMsg")} <b>${r.id}</b></p></div>`:""}
+ return `${sub(r.id,"/requests")}<main>${conf?`<div class="card" style="border-color:var(--green);background:#F2FAEE" role="status"><h3>${ic("check")} ${t("sent")}</h3><p>${t("sentMsg")} <b>${r.id}</b></p></div>`:""}
 <div class="card"><div class="row between"><h3>${esc(r.loc)}</h3>${statusPill(r.status)}</div><p>${t(r.cat)} · ${t(r.urg)}</p><p style="margin-top:8px;color:var(--text)">${esc(r.desc)}</p></div>
 <h2>${t("viewStatus")}</h2><ol class="timeline">${order.map((s,i)=>`<li class="${i<ci?"done":i===ci?(s==="resolved"?"done":"now"):""}"><b>${t("st_"+s)}</b><small>${r.hist[s]?new Date(r.hist[s]).toLocaleDateString(st.lang)+" · "+t("stD_"+s):t("pending")}</small></li>`).join("")}</ol>
 ${st.role==="council"&&r.status!=="resolved"?`<button class="btn secondary" id="advance" data-id="${r.id}">${t("setSt")}: ${t("st_"+order[ci+1])}</button>`:""}</main>${tabbar("/requests")}`};
 V.notices=()=>`${sub(t("nTitle"),st.role==="council"?"/council":"/home")}<main>${st.role==="council"?`<a class="btn primary" href="#/council/notice">+ ${t("postN")}</a>`:""}<h2>${t("notices")} ${sampleTag}</h2>${st.notices.map(noticeCard).join("")}</main>${tabbar("/notices")}`;
 V.notice=id=>{const n=st.notices.find(x=>x.id===id);if(!n)return V.notices();if(!n.seen){n.seen=1;save()}const a=st.acks[id];
  return `${sub(t("notices"),"/notices")}<main><article class="card"><h3 style="font-size:18px">${esc(n.title)}</h3><p>${t("postedBy")} ${esc(n.by)} · ${new Date(n.at).toLocaleDateString(st.lang)}</p><p style="color:var(--text);margin-top:12px;font-size:15px">${esc(n.body)}</p></article>
-${n.needAck?(a?`<p class="card center" role="status" style="background:#F2FAEE">✓ ${t("acked")}</p>`:`<button class="btn primary" id="ack" data-id="${id}">${t("ack")}</button>`):""}</main>${tabbar("/notices")}`};
+${n.needAck?(a?`<p class="card center" role="status" style="background:#F2FAEE">${ic("check")} ${t("acked")}</p>`:`<button class="btn primary" id="ack" data-id="${id}">${t("ack")}</button>`):""}</main>${tabbar("/notices")}`};
 V.documents=()=>{const cats=["dc_bylaws","dc_minutes","dc_forms","dc_ins"];return `${sub(t("dTitle"),st.role==="council"?"/council":"/home")}<main>${st.role==="council"?`<a class="btn primary" href="#/council/upload">+ ${t("upDoc")}</a>`:""}
-${cats.map(c=>{const d=st.docs.filter(x=>x.cat===c);return `<h2>${t(c)}</h2>`+(d.length?d.map(x=>`<a class="card row between" href="#/documents/${x.id}"><span>📄 ${esc(x.name)}</span><span class="pill s-submitted">${t("preview")}</span></a>`).join(""):`<p class="muted">${t("none")}</p>`)}).join("")}</main>${tabbar("/documents")}`};
+${cats.map(c=>{const d=st.docs.filter(x=>x.cat===c);return `<h2>${t(c)}</h2>`+(d.length?d.map(x=>`<a class="card row between" href="#/documents/${x.id}"><span>${ic("doc")} ${esc(x.name)}</span><span class="pill s-submitted">${t("preview")}</span></a>`).join(""):`<p class="muted">${t("none")}</p>`)}).join("")}</main>${tabbar("/documents")}`};
 V.doc=id=>{const d=st.docs.find(x=>x.id===id);if(!d)return V.documents();return `${sub(t("preview"),"/documents")}<main><p class="muted">${t(d.cat)} · ${sampleTag}</p><h2>${esc(d.name)}</h2>
 ${d.img?`<img src="${d.img}" alt="${esc(d.name)}" style="max-width:100%;border-radius:8px">`:`<div class="doc" tabindex="0" aria-label="${t("preview")}">${esc(d.body||"(Preview not available for this file type in the demo.)").replace(/\n/g,"<br>")}</div>`}
 <button class="btn ghost" onclick="alert('Download is disabled in this demo.')">${t("dl")}</button></main>${tabbar("/documents")}`};
 V.council=()=>{const R=st.requests,c=s=>R.filter(r=>r.status===s).length,open=R.filter(r=>r.status!=="resolved"),age=d=>(Date.now()-d)/day;
  const a0=open.filter(r=>age(r.at)<7).length,a7=open.filter(r=>age(r.at)>=7&&age(r.at)<=30).length,a30=open.filter(r=>age(r.at)>30).length;
- return `<div class="top council"><div class="row between"><div class="brand">STRATINK<b>™</b> · ${t("council")}</div><a class="iconbtn" href="#/settings" aria-label="${t("settings")}"><span aria-hidden="true">⚙</span></a></div><h1>${t("cdT")}</h1><p>${t("cdSub")}</p><p class="value">${t("value")}</p></div>${banners()}
+ return `<div class="top council"><div class="row between"><div class="brand">STRATINK<b>™</b> · ${t("council")}</div><a class="iconbtn" href="#/settings" aria-label="${t("settings")}"><span aria-hidden="true">${ic("gear")}</span></a></div><h1>${t("cdT")}</h1><p>${t("cdSub")}</p><p class="value">${t("value")}</p></div>${banners()}
 <main><h2>${t("mByStatus")} ${sampleTag}</h2><div class="stats">${["submitted","assigned","resolved"].map(s=>`<a class="stat" href="#/requests" style="text-decoration:none"><b>${c(s)}</b><span>${t("st_"+s)}</span></a>`).join("")}</div>
 <h2>${t("mByAge")} ${sampleTag}</h2><div class="stats"><div class="stat"><b>${a0}</b><span>${t("d0")}</span></div><div class="stat"><b>${a7}</b><span>${t("d7")}</span></div><div class="stat"><b style="color:${a30?"var(--red)":"var(--royal)"}">${a30}</b><span>${t("d30")}</span></div></div>
 <h2>${t("nRates")} ${sampleTag}</h2>${st.notices.slice(0,3).map(n=>`<a class="card" href="#/notices/${n.id}"><h3>${esc(n.title)}</h3><p>${t("read")} ${n.read}%</p><div class="bar" aria-hidden="true"><i style="width:${n.read}%;background:var(--royal)"></i></div>${n.needAck?`<p style="margin-top:6px">${t("ackR")} ${n.ackd}%</p><div class="bar" aria-hidden="true"><i style="width:${n.ackd}%"></i></div>`:""}</a>`).join("")}
-<div class="tiles" style="margin-top:12px"><a class="tile t2" href="#/council/notice"><span class="ic" aria-hidden="true">📣</span><b>${t("postN")}</b></a><a class="tile t4" href="#/council/upload"><span class="ic" aria-hidden="true">⬆</span><b>${t("upDoc")}</b></a><a class="tile t3 wide" href="#/council/roster"><span class="ic" aria-hidden="true">👥</span><b>${t("roster")}</b></a></div>
+<div class="tiles" style="margin-top:12px"><a class="tile t2" href="#/council/notice"><span class="ic" aria-hidden="true">${ic("megaphone")}</span><b>${t("postN")}</b></a><a class="tile t4" href="#/council/upload"><span class="ic" aria-hidden="true">${ic("upload")}</span><b>${t("upDoc")}</b></a><a class="tile t3 wide" href="#/council/roster"><span class="ic" aria-hidden="true">${ic("users")}</span><b>${t("roster")}</b></a></div>
 <h2>${t("decisions")} ${sampleTag}</h2>${st.decisions.map(d=>`<div class="card"><h3>${esc(d.title)}</h3><p>${esc(d.detail)} · ${d.votes} ${t("votes")}</p>${d.state?`<p><b>${t(d.state)}</b></p>`:`<div class="row"><button class="btn secondary" style="margin-top:10px" data-dec="${d.id}" data-v="approved">${t("approve")}</button><button class="btn ghost" style="margin-top:10px" data-dec="${d.id}" data-v="declined">${t("decline")}</button></div>`}</div>`).join("")}
 </main>${tabbar("/council")}`};
 V.postNotice=()=>`${sub(t("postN"),"/council")}<main><form id="f-notice" novalidate><label for="nt">${t("nTitleL")}</label><input id="nt" required aria-describedby="nt-e"><p id="nt-e" class="err" role="alert"></p>

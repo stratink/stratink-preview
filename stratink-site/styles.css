@@ -34,7 +34,7 @@ mark.confirm{background:#FFF3B0;color:#5E3B00;border:1px dashed #D9A400;border-r
 .pilot-sec{background:linear-gradient(180deg,#EEF4FF,#F4FAEF)}
 .pilot{display:grid;grid-template-columns:1.2fr 1fr;gap:var(--s5);align-items:start}
 .offer{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);margin-top:var(--s3)}
-.checks{list-style:none;padding:0;margin:0 0 var(--s2)}.checks li{padding-left:28px;position:relative;margin-bottom:var(--s1)}.checks li:before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:900}
+.checks{list-style:none;padding:0;margin:0 0 var(--s2)}.checks li{padding-left:28px;position:relative;margin-bottom:var(--s1)}.checks li:before{content:"";position:absolute;left:0;top:5px;width:18px;height:18px;background:var(--green);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat}
 form{background:#fff;border-radius:var(--r);padding:var(--s4);box-shadow:0 12px 40px rgba(13,43,107,.12);display:grid;gap:var(--s2)}
 label{display:block;font-weight:600;margin-bottom:6px;font-size:.92rem}
 input,select{width:100%;padding:12px 14px;border:1.5px solid #CBD4E4;border-radius:10px;font:inherit}
@@ -51,3 +51,6 @@ footer nav{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s3);align-items:cente
 footer mark.confirm{font-size:.75em}.legal{border-top:1px solid rgba(255,255,255,.12);margin-top:var(--s4);padding-top:var(--s3);font-size:.85rem}
 @media(max-width:960px){.grid,.g3{grid-template-columns:repeat(2,1fr)}.pilot,.fgrid{grid-template-columns:1fr}nav a:not(.nav-cta){display:none}}
 @media(max-width:600px){.grid,.g3,.g2,.offer{grid-template-columns:1fr}section{padding:var(--s5) 0}.hero{padding:64px 0}}
+
+/* Icon tile treatment from the original prototype: white circle, coloured stroke icon */
+.icon{border-radius:50%;background:#fff;box-shadow:0 4px 12px rgba(13,43,107,.12);border:1px solid var(--line)}
