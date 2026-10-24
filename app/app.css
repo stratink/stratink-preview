@@ -28,7 +28,6 @@ a.card,button.card{display:block;width:100%;text-align:start;color:inherit;text-
 .tag{display:inline-block;font-size:11px;font-weight:800;padding:3px 8px;border-radius:999px;background:#FFF4D6;color:#7A4B00;border:1px solid #F1D48A}
 .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px}
 .s-submitted{background:#E8EEFC;color:var(--royal)}.s-assigned{background:#FFF1DB;color:var(--amber)}.s-resolved{background:#E6F4DF;color:#2F6B16}
-.soon{opacity:.75;background:#fff;border:1px dashed #AEB8CC;color:var(--muted);border-radius:16px;padding:12px;display:flex;gap:10px;align-items:center}
 label{display:block;font-weight:700;font-size:14px;margin:14px 0 6px;color:var(--navy)}
 input,select,textarea{width:100%;font:inherit;font-size:16px;padding:12px;border:1.5px solid #C8D2E3;border-radius:12px;background:#fff;color:var(--text)}
 textarea{min-height:96px}
@@ -61,12 +60,10 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:6px;borde
 .tiles.big .tile{min-height:150px;position:relative;box-shadow:0 10px 24px rgba(13,43,107,.15);overflow:hidden}
 .tiles.big .tile:after{content:"";position:absolute;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.12);inset-inline-end:-24px;bottom:-24px}
 .tiles.big .tile.t4{grid-column:auto}
-.soon-tile{background:linear-gradient(140deg,#8C97AD,#6B768C);opacity:.85}
-.badge{position:absolute;top:12px;inset-inline-end:12px;background:#FFF4D6;color:#7A4B00;font-size:11px;font-weight:800;padding:3px 8px;border-radius:999px}
 /* Icon treatment from the original prototype: white circle, coloured stroke icon */
 .i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-5px;flex:none}
 .tile .ic{font-size:0}.tile .ic .i{width:26px;height:26px;stroke-width:2.25}
-.t1 .ic{color:#2F79A0}.t2 .ic{color:#2854B5}.t3 .ic{color:#3C9179}.t4 .ic{color:#14253E}.soon-tile .ic{color:#5A6478}
+.t1 .ic{color:#2F79A0}.t2 .ic{color:#2854B5}.t3 .ic{color:#3C9179}.t4 .ic{color:#14253E}
 .iconbtn .i{stroke:#fff}
 .tabbar a span{font-size:0;display:flex;justify-content:center;margin-bottom:2px}.tabbar a .i{width:22px;height:22px}
 .card .i{color:var(--royal)}
@@ -74,3 +71,6 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:6px;borde
 .brand.row span{font-size:13px;opacity:.9}
 .demo-strip{position:sticky;top:0;z-index:30;background:#FFE9A8;color:#4A3000;font-size:12px;font-weight:800;text-align:center;padding:5px 8px;letter-spacing:.02em}
 @media(min-width:600px){.app{height:calc(100% - 26px)}}
+.t5{background:linear-gradient(140deg,#4FA3D9,#2B78B8)}.t6{background:linear-gradient(140deg,#7FBF4E,#4F9A2E)}.t7{background:linear-gradient(140deg,#4BB5AA,#2A8A82)}
+.t5 .ic{color:#388CCB}.t6 .ic{color:#5DA82C}.t7 .ic{color:#289B94}
+a.card.row{gap:10px}
