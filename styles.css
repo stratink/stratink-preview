@@ -54,3 +54,24 @@ footer mark.confirm{font-size:.75em}.legal{border-top:1px solid rgba(255,255,255
 
 /* Icon tile treatment from the original prototype: white circle, coloured stroke icon */
 .icon{border-radius:50%;background:#fff;box-shadow:0 4px 12px rgba(13,43,107,.12);border:1px solid var(--line)}
+/* PDF rebuild additions */
+.logo img{height:44px;width:auto;display:block}.flogo .logo{display:inline-block;background:#fff;border-radius:10px;padding:6px 10px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card.is-soon{background:#FAFBFD}.card.is-soon .icon{color:#7A8499}
+.callout{margin-top:var(--s4);background:linear-gradient(90deg,#EAF0FC,#EEF7E9);border-left:4px solid var(--green);padding:var(--s2) var(--s3);border-radius:10px;font-weight:600;color:var(--navy)}
+.muted-note{margin-top:var(--s3);color:var(--muted);font-size:.9rem}
+.roadmap{list-style:none;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s2);margin-top:var(--s4)}.roadmap .card{position:relative}.roadmap .badge{margin:var(--s1) 0 0}
+.phase{display:inline-block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--royal);margin-bottom:var(--s1)}
+.table-wrap{overflow-x:auto;margin-top:var(--s4);border-radius:var(--r);box-shadow:var(--shadow);border:1px solid var(--line)}
+.cmp{width:100%;border-collapse:collapse;background:#fff;font-size:.95rem}.cmp th,.cmp td{padding:14px 16px;border-bottom:1px solid var(--line);text-align:left}
+.cmp thead th{background:var(--navy);color:#fff;font-weight:700}.cmp thead th.us{background:var(--royal)}.cmp td.us{background:#F1F5FD;font-weight:600}
+.cmp tbody th{font-weight:600;color:var(--ink)}
+.yes{color:#2F6B16;font-weight:700}.no{color:#8A93A6}.part{color:#7A4B00}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.draft-banner{background:#FFF1C2;border-bottom:2px solid #D9A400;color:#5E3B00;text-align:center;padding:12px var(--s3);font-weight:800}
+.legal-doc h2{font-size:1.3rem;margin-top:var(--s4)}.legal-doc p,.legal-doc li{color:var(--ink)}
+@media(max-width:960px){.g4,.roadmap{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.g4,.roadmap{grid-template-columns:1fr}}
+.consent-notice{font-size:.85rem;color:var(--muted);background:var(--soft);border-radius:10px;padding:12px;margin:0}
+.consent{display:flex;gap:10px;align-items:flex-start}.consent input{width:20px;height:20px;margin-top:3px;flex:none}.consent label{font-weight:500;font-size:.88rem}
+footer a{color:#fff;text-decoration:underline}footer nav a{text-decoration:none}

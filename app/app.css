@@ -70,3 +70,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:6px;borde
 .iconbtn .i{stroke:#fff}
 .tabbar a span{font-size:0;display:flex;justify-content:center;margin-bottom:2px}.tabbar a .i{width:22px;height:22px}
 .card .i{color:var(--royal)}
+.brand-logo{height:36px;width:auto;background:#fff;border-radius:10px;padding:4px 8px;display:block}
+.brand.row span{font-size:13px;opacity:.9}
+.demo-strip{position:sticky;top:0;z-index:30;background:#FFE9A8;color:#4A3000;font-size:12px;font-weight:800;text-align:center;padding:5px 8px;letter-spacing:.02em}
+@media(min-width:600px){.app{height:calc(100% - 26px)}}

@@ -101,13 +101,13 @@ const statusPill=s=>`<span class="pill s-${s}">${t("st_"+s)}</span>`;
 const sampleTag=`<span class="tag">${t("sample")}</span>`;
 
 const V={};
-V.join=()=>`<div class="top"><div class="brand">STRATINK<b>™</b></div><h1>${t("joinT")}</h1><p>${t("joinSub")}</p></div>${banners()}
+V.join=()=>`<div class="top"><div class="brand"><img class="brand-logo" src="logo_transparent.png" alt="STRATINK™" width="140" height="36"></div><h1>${t("joinT")}</h1><p>${t("joinSub")}</p></div>${banners()}
 <main><form id="f-join" novalidate><label for="code">${t("code")}</label><input id="code" name="code" autocomplete="off" placeholder="${t("codePh")}" aria-describedby="code-h code-e" required>
 <p id="code-h" class="muted">${t("codeHint")}</p><p id="code-e" class="err" role="alert"></p><button class="btn primary">${t("cont")}</button></form></main>`;
 V.unit=()=>{const p=st.pending;if(!p)return V.join();return `${sub(t("unitT"),"/join")}<main><p>${t("unitSub")}</p>
 <div class="card"><p class="muted">${t("unit")}</p><h3>${esc(p.unit)}</h3><p class="muted">${t("name")}</p><h3>${esc(p.name)}</h3><p class="muted">${t("role")}</p><h3>${t(p.role)}</h3> ${sampleTag}</div>
 <button class="btn primary" id="confirm">${t("confirm")}</button><a class="btn ghost" href="#/join">${t("notMe")}</a></main>`};
-V.home=()=>{const n=st.notices.slice(0,2),mine=st.requests.filter(r=>r.mine);return `<div class="top"><div class="row between"><div class="brand">STRATINK<b>™</b></div><a class="iconbtn" href="#/notices" aria-label="${t("notices")}"><span aria-hidden="true">${ic("bell")}</span></a></div>
+V.home=()=>{const n=st.notices.slice(0,2),mine=st.requests.filter(r=>r.mine);return `<div class="top"><div class="row between"><div class="brand"><img class="brand-logo" src="logo_transparent.png" alt="STRATINK™" width="140" height="36"></div><a class="iconbtn" href="#/notices" aria-label="${t("notices")}"><span aria-hidden="true">${ic("bell")}</span></a></div>
 <h1>${t("welcome")}</h1><p>${t("unitLine")}</p><p class="value">${t("value")}</p></div>${banners()}
 <main><div class="tiles big">
 <a class="tile t2" href="#/notices" aria-label="${t("nTitle")}"><span class="ic" aria-hidden="true">${ic("megaphone")}</span><span><b>${t("nTitle")}</b><br><small>${t("nSub")}</small></span></a>
@@ -145,7 +145,7 @@ ${d.img?`<img src="${d.img}" alt="${esc(d.name)}" style="max-width:100%;border-r
 <button class="btn ghost" onclick="alert('Download is disabled in this demo.')">${t("dl")}</button></main>${tabbar("/documents")}`};
 V.council=()=>{const R=st.requests,c=s=>R.filter(r=>r.status===s).length,open=R.filter(r=>r.status!=="resolved"),age=d=>(Date.now()-d)/day;
  const a0=open.filter(r=>age(r.at)<7).length,a7=open.filter(r=>age(r.at)>=7&&age(r.at)<=30).length,a30=open.filter(r=>age(r.at)>30).length;
- return `<div class="top council"><div class="row between"><div class="brand">STRATINK<b>™</b> · ${t("council")}</div><a class="iconbtn" href="#/settings" aria-label="${t("settings")}"><span aria-hidden="true">${ic("gear")}</span></a></div><h1>${t("cdT")}</h1><p>${t("cdSub")}</p><p class="value">${t("value")}</p></div>${banners()}
+ return `<div class="top council"><div class="row between"><div class="brand row"><img class="brand-logo" src="logo_transparent.png" alt="STRATINK™" width="140" height="36"><span>${t("council")}</span></div><a class="iconbtn" href="#/settings" aria-label="${t("settings")}"><span aria-hidden="true">${ic("gear")}</span></a></div><h1>${t("cdT")}</h1><p>${t("cdSub")}</p><p class="value">${t("value")}</p></div>${banners()}
 <main><h2>${t("mByStatus")} ${sampleTag}</h2><div class="stats">${["submitted","assigned","resolved"].map(s=>`<a class="stat" href="#/requests" style="text-decoration:none"><b>${c(s)}</b><span>${t("st_"+s)}</span></a>`).join("")}</div>
 <h2>${t("mByAge")} ${sampleTag}</h2><div class="stats"><div class="stat"><b>${a0}</b><span>${t("d0")}</span></div><div class="stat"><b>${a7}</b><span>${t("d7")}</span></div><div class="stat"><b style="color:${a30?"var(--red)":"var(--royal)"}">${a30}</b><span>${t("d30")}</span></div></div>
 <h2>${t("nRates")} ${sampleTag}</h2>${st.notices.slice(0,3).map(n=>`<a class="card" href="#/notices/${n.id}"><h3>${esc(n.title)}</h3><p>${t("read")} ${n.read}%</p><div class="bar" aria-hidden="true"><i style="width:${n.read}%;background:var(--royal)"></i></div>${n.needAck?`<p style="margin-top:6px">${t("ackR")} ${n.ackd}%</p><div class="bar" aria-hidden="true"><i style="width:${n.ackd}%"></i></div>`:""}</a>`).join("")}
